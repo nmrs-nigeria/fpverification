@@ -1,0 +1,6 @@
+org\openmrs\module\fpverification\api\FpverificationService.class
+org\openmrs\module\fpverification\FpverificationActivator.class
+org\openmrs\module\fpverification\Item.class
+org\openmrs\module\fpverification\FpverificationConfig.class
+org\openmrs\module\fpverification\api\impl\FpverificationServiceImpl.class
+org\openmrs\module\fpverification\api\dao\FpverificationDao.class
