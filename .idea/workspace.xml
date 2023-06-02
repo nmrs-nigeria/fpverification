@@ -2,31 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8dfdfb48-f920-4f8c-bd07-b9d0cb6b0699" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/images/Sa7X.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/fpverification-api-1.0.0-SNAPSHOT-tests.jar" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/fpverification-api-1.0.0-SNAPSHOT-tests.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/fpverification-api-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/fpverification-api-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/maven-java-formatter-cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/maven-java-formatter-cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/surefire-reports/TEST-org.openmrs.module.fpverification.api.FpverificationServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/surefire-reports/TEST-org.openmrs.module.fpverification.api.FpverificationServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/surefire-reports/TEST-org.openmrs.module.fpverification.api.dao.FpverificationDaoTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/surefire-reports/TEST-org.openmrs.module.fpverification.api.dao.FpverificationDaoTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/surefire-reports/org.openmrs.module.fpverification.api.FpverificationServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/surefire-reports/org.openmrs.module.fpverification.api.FpverificationServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/target/surefire-reports/org.openmrs.module.fpverification.api.dao.FpverificationDaoTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/target/surefire-reports/org.openmrs.module.fpverification.api.dao.FpverificationDaoTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/omod/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/Utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/Utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/fpverification/Utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/fpverification/Utils/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT-tests.jar" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT-tests.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT.omod" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT.omod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT/lib/fpverification-api-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT/lib/fpverification-api-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT/org/openmrs/module/fpverification/Utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT/org/openmrs/module/fpverification/Utils/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/fpverification-1.0.0-SNAPSHOT/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/maven-java-formatter-cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/maven-java-formatter-cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/surefire-reports/TEST-org.openmrs.module.fpverification.AdminListExtensionTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/surefire-reports/TEST-org.openmrs.module.fpverification.AdminListExtensionTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/target/surefire-reports/org.openmrs.module.fpverification.AdminListExtensionTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/omod/target/surefire-reports/org.openmrs.module.fpverification.AdminListExtensionTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/pages/fpverificationHome.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/omod/src/main/webapp/pages/fpverificationHome.gsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/api/target/" />
@@ -67,8 +46,8 @@
       <file leaf-file-name="FpverificationHomeFragmentController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="486">
+              <caret line="92" selection-start-line="92" selection-end-line="92" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2124#2132#0" expanded="true" />
@@ -101,8 +80,21 @@
       <file leaf-file-name="fpverificationHome.gsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/pages/fpverificationHome.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="588">
+              <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+              <folding>
+                <element signature="n#style#0;n#h4#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#2;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#div#1;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -161,10 +153,10 @@
         <option value="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/model/Validator.java" />
         <option value="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/Utils/ZipUtil.java" />
         <option value="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/fragment/controller/fpverificationHomeFragmentController.java" />
-        <option value="$PROJECT_DIR$/omod/src/main/webapp/pages/fpverificationHome.gsp" />
         <option value="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/db/NdrDBManager.java" />
         <option value="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/Utils/Utils.java" />
         <option value="$PROJECT_DIR$/omod/pom.xml" />
+        <option value="$PROJECT_DIR$/omod/src/main/webapp/pages/fpverificationHome.gsp" />
         <option value="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.java" />
       </list>
     </option>
@@ -401,16 +393,6 @@
               <item name="omod" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fpverification" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fpverification" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fpverification" type="462c0819:PsiDirectoryNode" />
-              <item name="omod" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -429,6 +411,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fpverification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fpverification" type="462c0819:PsiDirectoryNode" />
+              <item name="omod" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -453,6 +444,7 @@
       <recent name="org.openmrs.module.fpverification.db" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tobechi Anekwe\fpverification\omod\src\main\webapp\resources" />
       <recent name="C:\Users\Tobechi Anekwe\fpverification\omod\src\main\resources" />
       <recent name="C:\Users\Tobechi Anekwe\fpverification\omod\src\main\java\org\openmrs\module\fpverification\model" />
     </key>
@@ -523,12 +515,12 @@
       <option name="presentableId" value="Default" />
       <updated>1685085544705</updated>
       <workItem from="1685085546085" duration="24259000" />
-      <workItem from="1685523155742" duration="58171000" />
+      <workItem from="1685523155742" duration="59192000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82430000" />
+    <option name="totallyTimeSpent" value="83451000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1395" height="829" extended-state="6" />
@@ -549,7 +541,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.4002976" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.18623784" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22288705" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -768,13 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/pages/fpverificationHome.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/db/NdrDBManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="972">
@@ -812,10 +797,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/pages/fpverificationHome.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+          <folding>
+            <element signature="n#style#0;n#h4#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#2;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/fpverification/fragment/controller/FpverificationHomeFragmentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="486">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2124#2132#0" expanded="true" />

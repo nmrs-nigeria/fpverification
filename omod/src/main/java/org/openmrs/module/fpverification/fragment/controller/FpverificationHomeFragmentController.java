@@ -78,12 +78,18 @@ public class FpverificationHomeFragmentController {
 		String IPShortName = Utils.getIPShortName();
 
 
-        String zipFileName = facilityName + "_ " + IPShortName + "_"+ "Fingerprintverification" +"_" + datimCode + "_" + formattedDate + ".zip";
+        String zipFileName = IPShortName + "_"+ "Fingerprintverification" +"_" + datimCode + "_" + formattedDate + ".zip";
 
         Utils.zipFolder(request, reportFolder, zipFileName, reportType);
 
+		List<String> outputList = new ArrayList<>();
+		outputList.add(zipFileName);
+		outputList.add(formattedDate);
+		outputList.add(String.valueOf(list.size()));
+		String filepath = reportFolder+"/"+zipFileName;
+		outputList.add(filepath);
+		return gson.toJson(outputList);
 
-		return gson.toJson("Done");
 	}
 	
 	public void getPatientBiometricsVerifyContainer(String startdate, String enddate, HttpServletRequest request)
