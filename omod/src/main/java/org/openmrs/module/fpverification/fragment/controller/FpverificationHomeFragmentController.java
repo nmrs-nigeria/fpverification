@@ -25,10 +25,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,8 +41,6 @@ public class FpverificationHomeFragmentController {
 	SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 	
 	SimpleDateFormat visitID = new SimpleDateFormat("yyyyMMdd");
-	
-	HttpServletRequest request2 = null;
 	
 	private static final Log LOG = LogFactory.getLog(FpverificationHomeFragmentController.class);
 	
@@ -65,29 +60,34 @@ public class FpverificationHomeFragmentController {
 	
 	List<String> filesListInDir = new ArrayList<String>();
 	
+	private String reportFolder;
+	
+	private String formattedDate;
+	
 	public String extractFingerprint(@RequestParam(value = "startdate", required = true) String startdate,
 	        @RequestParam(value = "enddate", required = true) String enddate, HttpServletRequest request) throws Exception {
 		list = new ArrayList<>();
-		//nd.getPatientBiometricsVerifyDistinct(startdate, enddate);
+		Utils.ensureReportFolderExistDelete(request,reportType);
+
 		nd.openConnection();
 		list =	nd.getPatientBiometricsVerifyDistinctList();
-		getPatientBiometricsVerifyContainer(startdate, enddate);
+		getPatientBiometricsVerifyContainer(startdate, enddate, request);
 		nd.closeConnection();
-		Container reportObject = containerTemplate;
-		JAXBContext jaxbContext;
-	//	SimpleObject result = new SimpleObject();
 		String datimCode = Utils.getFacilityLocalId();
 		String facilityName = Utils.getFacilityName();
 		String IPShortName = Utils.getIPShortName();
-		request2 = request;
-        File toZIP = new File("C:/fpverification");
-        String zipDirName = "C:/fpverification/fpverification.zip";
-        zipDirectory(toZIP, zipDirName);
-		
+
+
+        String zipFileName = facilityName + "_ " + IPShortName + "_"+ "Fingerprintverification" +"_" + datimCode + "_" + formattedDate + ".zip";
+
+        Utils.zipFolder(request, reportFolder, zipFileName, reportType);
+
+
 		return gson.toJson("Done");
 	}
 	
-	public void getPatientBiometricsVerifyContainer(String startdate, String enddate) throws Exception {
+	public void getPatientBiometricsVerifyContainer(String startdate, String enddate, HttpServletRequest request)
+	        throws Exception {
 		String patientIdentifier = "";
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("getPatientBiometricsVerifyContainer " + String.valueOf(list.get(i)));
@@ -200,9 +200,10 @@ public class FpverificationHomeFragmentController {
 				
 			}
 			
-			exportXML(patientIdentifier);
+			exportXML(patientIdentifier, request);
 			
 		}
+		
 	}
 	
 	private void writeFile(Container ndrReportTemplate, File file, Marshaller jaxbMarshaller) {
@@ -219,14 +220,11 @@ public class FpverificationHomeFragmentController {
 		
 	}
 	
-	public void exportXML(String PatientIdentifier) throws Exception {
+	public void exportXML(String PatientIdentifier, HttpServletRequest request) throws Exception {
 		
 		JAXBContext jaxbContext;
-		//SimpleObject result = new SimpleObject();
 		String datimCode = Utils.getFacilityLocalId();
-		String facilityName = Utils.getFacilityName();
 		String IPShortName = Utils.getIPShortName();
-		String reportType = "Commodity";
 		System.out.println("about to create jaxb context");
 		// jaxbContext = JAXBContext.newInstance("org.openmrs.module.openhmis.ndrmodel");
 		jaxbContext = JAXBContext.newInstance(Container.class);
@@ -235,22 +233,23 @@ public class FpverificationHomeFragmentController {
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		System.out.println("done creating marshaller");
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		String formattedDate = new SimpleDateFormat("ddMMyy").format(new Date());
+		formattedDate = new SimpleDateFormat("ddMMyy").format(new Date());
+		
 		if (containerTemplate != null) {
 			
 			System.out.println("starting xml creating process");
 			LOG.info("Testing log4j");
-			//String reportFolder = Utils.ensureReportFolderExist(request, reportType);
+			reportFolder = Utils.ensureReportFolderExist(request, reportType);
 			datimCode = datimCode.replace("/", "_");
 			
 			String fileName = IPShortName + "_" + "Fingerprintverification" + "_" + datimCode + "_" + PatientIdentifier
 			        + "_" + formattedDate;
 			System.out.println("File name is " + fileName);
 			
-			//	String xmlFile = Paths.get(reportFolder, fileName + ".xml").toString();
+			String xmlFile = Paths.get(reportFolder, fileName + ".xml").toString();
 			
-			File aXMLFile = new File("C:/fpverification" + File.separator + fileName + ".xml");
-			aXMLFile.getParentFile().mkdirs();
+			File aXMLFile = new File(xmlFile);
+			
 			Boolean b;
 			
 			b = aXMLFile.createNewFile();
@@ -304,6 +303,16 @@ public class FpverificationHomeFragmentController {
 			else
 				populateFilesList(file);
 		}
+	}
+	
+	boolean deleteDirectory(File directoryToBeDeleted) {
+		File[] allContents = directoryToBeDeleted.listFiles();
+		if (allContents != null) {
+			for (File file : allContents) {
+				deleteDirectory(file);
+			}
+		}
+		return directoryToBeDeleted.delete();
 	}
 	
 }

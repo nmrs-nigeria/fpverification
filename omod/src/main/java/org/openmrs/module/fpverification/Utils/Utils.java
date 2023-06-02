@@ -213,6 +213,38 @@ public class Utils {
 		System.out.println(reportType + " folder exist ? : " + dir.exists());
 		
 		//create today's folder
+		boolean b = false;
+		String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+		//old implementation
+		// String todayFolders = reportFolder + "/" + dateString;
+		String todayFolders = Paths.get(reportFolder, dateString).toString();
+		dir = new File(todayFolders);
+		if (dir.exists()) {
+			File[] previousFiles = dir.listFiles();
+			assert previousFiles != null;
+			for (File f : previousFiles) {
+				//	b = f.delete();
+				System.out.println("deleted previous xml successfully ? " + b);
+			}
+			//b = dir.delete();
+			System.out.println("deleted previous folder successfully ? " + b);
+		}
+		dir.mkdir();
+		System.out.println(todayFolders + " folder exist ? " + dir.exists());
+		
+		return todayFolders;
+	}
+	
+	public static String ensureReportFolderExistDelete(HttpServletRequest request, String reportType) {
+		String downloadFolder = ensureDownloadFolderExist(request);
+		//old implementation
+		// String reportFolder = downloadFolder + "/" + reportType;
+		String reportFolder = Paths.get(downloadFolder, reportType).toString();
+		File dir = new File(reportFolder);
+		dir.mkdir();
+		System.out.println(reportType + " folder exist ? : " + dir.exists());
+		
+		//create today's folder
 		boolean b;
 		String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 		//old implementation
