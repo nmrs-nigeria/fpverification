@@ -9,6 +9,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.context.AppContextModel;
 import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.appui.UiSessionContext;
+import org.openmrs.module.fpverification.Utils.LoggerUtils;
 import org.openmrs.module.fpverification.Utils.Utils;
 import org.openmrs.module.fpverification.Utils.ZipUtil;
 import org.openmrs.module.fpverification.db.NdrDBManager;
@@ -31,6 +32,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -64,32 +67,61 @@ public class FpverificationHomeFragmentController {
 	
 	private String formattedDate;
 	
+	private Thread thread1;
+	
 	public String extractFingerprint(@RequestParam(value = "startdate", required = true) String startdate,
-	        @RequestParam(value = "enddate", required = true) String enddate, HttpServletRequest request) throws Exception {
-		list = new ArrayList<>();
-		Utils.ensureReportFolderExistDelete(request,reportType);
-
-		nd.openConnection();
-		list =	nd.getPatientBiometricsVerifyDistinctList();
-		getPatientBiometricsVerifyContainer(startdate, enddate, request);
-		nd.closeConnection();
-		String datimCode = Utils.getFacilityLocalId();
-		String facilityName = Utils.getFacilityName();
-		String IPShortName = Utils.getIPShortName();
-
-
-        String zipFileName = IPShortName + "_"+ "Fingerprintverification" +"_" + datimCode + "_" + formattedDate + ".zip";
-
-        Utils.zipFolder(request, reportFolder, zipFileName, reportType);
-
+	        @RequestParam(value = "enddate", required = true) String enddate, HttpServletRequest request) {
 		List<String> outputList = new ArrayList<>();
-		outputList.add(zipFileName);
-		outputList.add(formattedDate);
-		outputList.add(String.valueOf(list.size()));
-		String filepath = reportFolder+"/"+zipFileName;
-		outputList.add(filepath);
-		return gson.toJson(outputList);
+		try {
 
+			list = new ArrayList<>();
+			Utils.ensureReportFolderExistDelete(request, reportType);
+			nd.openConnection();
+			list = nd.getPatientBiometricsVerifyDistinctList();
+			getPatientBiometricsVerifyContainer(startdate, enddate, request);
+//			thread1 = new Thread() {
+//				@Override
+//				public void run() {
+//
+//					//updateOpenMRSLocation();
+//					try {
+//						getPatientBiometricsVerifyContainer(startdate, enddate, request);
+//					} catch (Exception ex) {
+//						Logger.getLogger(FpverificationHomeFragmentController.class.getName()).log(Level.SEVERE, null, ex);
+//					}
+//
+//
+//				}
+//			};
+//			thread1.start();
+
+			String datimCode = Utils.getFacilityLocalId();
+			String facilityName = Utils.getFacilityName();
+			String IPShortName = Utils.getIPShortName();
+
+
+			String zipFileName = IPShortName + "_" + "Fingerprintverification" + "_" + datimCode + "_" + formattedDate + ".zip";
+
+			String filepath = Utils.zipFolder(request, reportFolder, zipFileName, reportType);
+
+
+			outputList.add(zipFileName);
+			outputList.add(formattedDate);
+			outputList.add(String.valueOf(list.size()));
+			outputList.add(filepath);
+
+		}catch (Exception e) {
+
+			Logger.getLogger(FpverificationHomeFragmentController.class.getName()).log(Level.SEVERE, null, e);
+
+		}finally {
+			try{
+
+			}catch (Exception e){
+				nd.closeConnection();
+			}
+		}
+		return gson.toJson(outputList);
 	}
 	
 	public void getPatientBiometricsVerifyContainer(String startdate, String enddate, HttpServletRequest request)

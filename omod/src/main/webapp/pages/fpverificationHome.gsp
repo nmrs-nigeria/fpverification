@@ -73,16 +73,6 @@
                 'enddate':enddate,
             },
             success: function (response) {
-
-                if (filename.endsWith(".zip")){
-                    jq('#gen-wait').hide();
-                    window.location = filename;
-                    console.log()
-                }else{
-                    alert(filename)
-                    jq('#gen-wait').hide();
-                    loadFileList()
-                }
                 // Hide 'gen-wait' element when a response is received.
                 jq('#gen-wait').hide();
                 console.log(response);

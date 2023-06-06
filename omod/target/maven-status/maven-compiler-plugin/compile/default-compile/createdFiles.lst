@@ -12,8 +12,11 @@ org\openmrs\module\fpverification\model\ndr\FingerPrintType.class
 org\openmrs\module\fpverification\model\DBConnection.class
 org\openmrs\module\fpverification\model\ndr\IdentifierType.class
 org\openmrs\module\fpverification\Utils\Utils.class
+org\openmrs\module\fpverification\Utils\LoggerUtils$LogFormat.class
+org\openmrs\module\fpverification\Utils\LoggerUtils.class
 org\openmrs\module\fpverification\model\ndr\ObjectFactory.class
 org\openmrs\module\fpverification\model\ndr\LeftHandType.class
+org\openmrs\module\fpverification\Utils\LoggerUtils$LogLevel.class
 org\openmrs\module\fpverification\db\NdrDBManager.class
 org\openmrs\module\fpverification\model\Validator.class
 org\openmrs\module\fpverification\model\ndr\FacilityType.class
