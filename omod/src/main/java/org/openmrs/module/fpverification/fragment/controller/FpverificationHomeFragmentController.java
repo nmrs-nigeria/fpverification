@@ -77,7 +77,7 @@ public class FpverificationHomeFragmentController {
 			list = new ArrayList<>();
 			Utils.ensureReportFolderExistDelete(request, reportType);
 			nd.openConnection();
-			list = nd.getPatientBiometricsVerifyDistinctList();
+			list = nd.getPatientBiometricsVerifyDistinctList(startdate, enddate);
 			getPatientBiometricsVerifyContainer(startdate, enddate, request);
 //			thread1 = new Thread() {
 //				@Override
@@ -116,9 +116,9 @@ public class FpverificationHomeFragmentController {
 
 		}finally {
 			try{
-
-			}catch (Exception e){
 				nd.closeConnection();
+			}catch (Exception e){
+
 			}
 		}
 		return gson.toJson(outputList);

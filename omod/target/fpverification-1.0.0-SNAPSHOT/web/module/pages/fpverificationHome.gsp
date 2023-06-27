@@ -78,6 +78,13 @@
                 console.log(response);
                 var res = JSON.parse(response);
                 console.log(res);
+
+                if(res.length === ""){
+                    console.log("Response is not empty");
+                }else {
+                    console.log("Response is empty");
+                }
+
                 jq('#TableBody')
                     .append("<tr>" +
                         "<td>" + res[0] + "</td>" +

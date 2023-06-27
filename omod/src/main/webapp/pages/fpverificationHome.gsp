@@ -55,6 +55,7 @@
 </div>
 
 <script>
+
     var jq = jQuery;
 
     function getStart() {
@@ -78,6 +79,13 @@
                 console.log(response);
                 var res = JSON.parse(response);
                 console.log(res);
+
+                if(isObjectEmpty(res)){
+                    console.log("Response is empty");
+                }else {
+                    console.log("Response is not empty");
+                }
+
                 jq('#TableBody')
                     .append("<tr>" +
                         "<td>" + res[0] + "</td>" +
@@ -93,6 +101,15 @@
                 console.log(xhr);
             }
         });
+    }
+
+    function isObjectEmpty (objectName) {
+        for (var prop in objectName) {
+            if (objectName.hasOwnProperty(prop)) {
+                return false;
+            }
+        }
+        return true;
     }
 </script>
 

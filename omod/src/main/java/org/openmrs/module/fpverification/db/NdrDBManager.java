@@ -99,15 +99,17 @@ public class NdrDBManager {
 		return rs;
 	}
 	
-	public List<Integer> getPatientBiometricsVerifyDistinctList() throws Exception {
+	public List<Integer> getPatientBiometricsVerifyDistinctList(String startdate, String enddate) throws Exception {
 		List<Integer> list = new ArrayList<>();
 		try {
-			FpverificationHomeFragmentController fp = new FpverificationHomeFragmentController();
 
 			System.out.println("getPatientBiometricsVerifyDistinct");
-			String sql2 = "SELECT distinct patient_Id FROM biometricverificationinfo";
-			pStatement = conn.createStatement();
-			rs2 = pStatement.executeQuery(sql2);
+			String sql2 = "SELECT distinct patient_Id FROM biometricverificationinfo where DATE(date_created) between ? and ? ";
+			pStatement1 = conn.prepareStatement(sql2);
+			pStatement1.setString(1, startdate);
+			pStatement1.setString(2, enddate);
+
+			rs2 = pStatement1.executeQuery();
 			while (rs2.next()) {
 				System.out.println("getPatientBiometricsVerifyDistinct" + rs2.getInt("patient_Id"));
 				list.add(rs2.getInt("patient_Id"));
