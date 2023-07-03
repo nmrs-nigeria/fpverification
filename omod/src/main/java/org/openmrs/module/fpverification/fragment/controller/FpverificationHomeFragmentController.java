@@ -65,9 +65,15 @@ public class FpverificationHomeFragmentController {
 	
 	private String reportFolder;
 	
+	String dateFormat2;
+	
 	private String formattedDate;
 	
 	private Thread thread1;
+	
+	public FpverificationHomeFragmentController() {
+		this.dateFormat2 = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	}
 	
 	public String extractFingerprint(@RequestParam(value = "startdate", required = true) String startdate,
 	        @RequestParam(value = "enddate", required = true) String enddate, HttpServletRequest request) {
@@ -78,35 +84,20 @@ public class FpverificationHomeFragmentController {
 			Utils.ensureReportFolderExistDelete(request, reportType);
 			nd.openConnection();
 			list = nd.getPatientBiometricsVerifyDistinctList(startdate, enddate);
+			if (this.list.isEmpty()) {
+				this.nd.closeConnection();
+				return this.gson.toJson("No record found");
+			}
 			getPatientBiometricsVerifyContainer(startdate, enddate, request);
-//			thread1 = new Thread() {
-//				@Override
-//				public void run() {
-//
-//					//updateOpenMRSLocation();
-//					try {
-//						getPatientBiometricsVerifyContainer(startdate, enddate, request);
-//					} catch (Exception ex) {
-//						Logger.getLogger(FpverificationHomeFragmentController.class.getName()).log(Level.SEVERE, null, ex);
-//					}
-//
-//
-//				}
-//			};
-//			thread1.start();
 
-			String datimCode = Utils.getFacilityLocalId();
 			String facilityName = Utils.getFacilityName();
 			String IPShortName = Utils.getIPShortName();
-
-
+			String datimCode = Utils.getFacilityDATIMId();
 			String zipFileName = IPShortName + "_" + "Fingerprintverification" + "_" + datimCode + "_" + formattedDate + ".zip";
-
 			String filepath = Utils.zipFolder(request, reportFolder, zipFileName, reportType);
-
-
+			
 			outputList.add(zipFileName);
-			outputList.add(formattedDate);
+			outputList.add(dateFormat2);
 			outputList.add(String.valueOf(list.size()));
 			outputList.add(filepath);
 
@@ -135,13 +126,13 @@ public class FpverificationHomeFragmentController {
 			RightHandType rightFingerType = new RightHandType();
 			LeftHandType leftFingerType = new LeftHandType();
 			XMLGregorianCalendar dataCaptured = null;
-			
+			Calendar cal = Calendar.getInstance();
 			NdrDBManager nd = new NdrDBManager();
 			Utils u = new Utils();
 			
 			Date date = new Date();
 			MessageHeaderType messageHeaderType = new MessageHeaderType();
-			messageHeaderType.setMessageCreationDateTime(u.getXmlDateTime(new Date()));
+			messageHeaderType.setMessageCreationDateTime(u.getXmlDateTime(cal.getTime()));
 			messageHeaderType.setMessageUniqueID(UUID.randomUUID().toString());
 			messageHeaderType.setMessageVersion(1.0f);
 			messageHeaderType.setXmlType("fingerprintsvalidation");

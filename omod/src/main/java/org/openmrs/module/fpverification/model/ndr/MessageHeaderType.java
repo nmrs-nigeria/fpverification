@@ -44,7 +44,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class MessageHeaderType {
 	
 	@XmlElement(name = "MessageCreationDateTime", required = true)
-	@XmlSchemaType(name = "date")
+	@XmlSchemaType(name = "dateTime")
 	protected XMLGregorianCalendar messageCreationDateTime;
 	
 	@XmlElement(name = "MessageUniqueID", required = true)
