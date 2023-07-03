@@ -2,8 +2,8 @@
 
 <%= ui.resourceLinks() %>
 
-<div class="row wrapper  white-bg page-heading"  style="">
-    <h4 style="text-align: center">
+<div class="row wrapper white-bg page-heading" style="display: flex; justify-content: center; align-items: center;">
+    <h4 style="text-align: center;">
         NDR Export for fingerprint recapture
     </h4>
 </div>
@@ -14,9 +14,9 @@
         <br/> <br/>
         <div>
             <label id="lblfrom" for="startdate" style="color: white; margin-left: 50px;">Start Date</label><br id="br4">
-            <input style="background-color: #E8F0FE; margin-left: 52px;margin-bottom: 15px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px;" name="startdate" id="startdate" type="date"/><br>
+            <input style="background-color: #E8F0FE; margin-left: 52px;margin-bottom: 15px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px;" name="startdate" id="startdate" type="date" required="required"/><br>
             <label id="lblto" for="enddate" style="color: white; margin-left: 50px;">End Date</label><br id="br6">
-            <input style="background-color: #E8F0FE; margin-left: 52px;margin-bottom: 15px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px;" name="enddate" id="enddate" type="date"/><br>
+            <input style="background-color: #E8F0FE; margin-left: 52px;margin-bottom: 15px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px;" name="enddate" id="enddate" type="date" required="required"/><br>
             <input style="background-color: #E8F0FE; margin-left: 52px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px" type="button" value="Export" onclick="getStart()" class="btn btn-primary" />
         </div>
         <br/><br/>
@@ -65,6 +65,14 @@
         var startdate = document.getElementById("startdate").value;
         var enddate = document.getElementById("enddate").value;
 
+        // Check if either startdate or enddate is empty
+        if(startdate === "" || enddate === ""){
+            alert("Please provide both start date and end date");
+            // Hide 'gen-wait' element since there's no processing happening
+            jq('#gen-wait').hide();
+            return;
+        }
+
         jq.ajax({
             url: "${ ui.actionLink("fpverification", "fpverificationHome", "extractFingerprint") }",
             dataType: "json",
@@ -77,22 +85,19 @@
                 jq('#gen-wait').hide();
                 console.log(response);
                 var res = JSON.parse(response);
-                console.log(res);
-
-                if(res.length === ""){
-                    console.log("Response is not empty");
-                }else {
-                    console.log("Response is empty");
+                if(res === "No record found") {
+                    alert(res);
+                } else {
+                    console.log(res);
+                    jq('#TableBody')
+                        .append("<tr>" +
+                            "<td>" + res[0] + "</td>" +
+                            "<td>" + res[1] + "</td>" +
+                            "<td>" + res[1] + "</td>" +
+                            "<td>" + res[2] + "</td>" +
+                            "<td><a href='" + res[3] + "' download>Download</a></td>" +
+                            "</tr>");
                 }
-
-                jq('#TableBody')
-                    .append("<tr>" +
-                        "<td>" + res[0] + "</td>" +
-                        "<td>" + res[1] + "</td>" +
-                        "<td>" + res[1] + "</td>" +
-                        "<td>" + res[2] + "</td>" +
-                        "<td><a href='" + res[3] + "' download>Download</a></td>" +
-                        "</tr>");
             },
             error:function(xhr){
                 // Hide 'gen-wait' element if an error occurs.
@@ -101,6 +106,7 @@
             }
         });
     }
+
 </script>
 
 

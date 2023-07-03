@@ -149,7 +149,7 @@ public class Utils {
 		
 		//old implementation
 		//  return request.getContextPath() + "/downloads/" + reportType + "/" + zipFileName;
-		return Paths.get(request.getContextPath(), "CMdownloads", reportType, zipFileName).toString();
+		return Paths.get(request.getContextPath(), "FPdownloads", reportType, zipFileName).toString();
 	}
 	
 	public static Date parseCustomOpenhmisDateString(String dateText) {
@@ -195,7 +195,7 @@ public class Utils {
 	public static String ensureDownloadFolderExist(HttpServletRequest request) {
 		String folder = Paths.get(
 		    new File(request.getSession().getServletContext().getRealPath(request.getContextPath())).getParentFile()
-		            .toString(), "CMdownloads").toString();
+		            .toString(), "FPdownloads").toString();
 		
 		File dir = new File(folder);
 		Boolean b = dir.mkdir();
@@ -203,67 +203,50 @@ public class Utils {
 		return folder;
 	}
 	
-	public static String ensureReportFolderExist(HttpServletRequest request, String reportType) {
-		String downloadFolder = ensureDownloadFolderExist(request);
-		//old implementation
-		// String reportFolder = downloadFolder + "/" + reportType;
-		String reportFolder = Paths.get(downloadFolder, reportType).toString();
+	public static String ensureReportFolderExist(final HttpServletRequest request, final String reportType) {
+		final String downloadFolder = ensureDownloadFolderExist(request);
+		final String reportFolder = Paths.get(downloadFolder, reportType).toString();
 		File dir = new File(reportFolder);
 		dir.mkdir();
 		System.out.println(reportType + " folder exist ? : " + dir.exists());
-		
-		//create today's folder
-		boolean b = false;
-		String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-		//old implementation
-		// String todayFolders = reportFolder + "/" + dateString;
-		String todayFolders = Paths.get(reportFolder, dateString).toString();
+		final boolean b = false;
+		final String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+		final String todayFolders = Paths.get(reportFolder, dateString).toString();
 		dir = new File(todayFolders);
 		if (dir.exists()) {
-			File[] previousFiles = dir.listFiles();
+			final File[] previousFiles = dir.listFiles();
 			assert previousFiles != null;
-			for (File f : previousFiles) {
-				//	b = f.delete();
+			for (final File f : previousFiles) {
 				System.out.println("deleted previous xml successfully ? " + b);
 			}
-			//b = dir.delete();
 			System.out.println("deleted previous folder successfully ? " + b);
 		}
 		dir.mkdir();
 		System.out.println(todayFolders + " folder exist ? " + dir.exists());
-		
 		return todayFolders;
 	}
 	
-	public static String ensureReportFolderExistDelete(HttpServletRequest request, String reportType) {
-		String downloadFolder = ensureDownloadFolderExist(request);
-		//old implementation
-		// String reportFolder = downloadFolder + "/" + reportType;
-		String reportFolder = Paths.get(downloadFolder, reportType).toString();
+	public static String ensureReportFolderExistDelete(final HttpServletRequest request, final String reportType) {
+		final String downloadFolder = ensureDownloadFolderExist(request);
+		final String reportFolder = Paths.get(downloadFolder, reportType).toString();
 		File dir = new File(reportFolder);
 		dir.mkdir();
 		System.out.println(reportType + " folder exist ? : " + dir.exists());
-		
-		//create today's folder
-		boolean b;
-		String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-		//old implementation
-		// String todayFolders = reportFolder + "/" + dateString;
-		String todayFolders = Paths.get(reportFolder, dateString).toString();
+		final String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+		final String todayFolders = Paths.get(reportFolder, dateString).toString();
 		dir = new File(todayFolders);
 		if (dir.exists()) {
-			File[] previousFiles = dir.listFiles();
+			final File[] previousFiles = dir.listFiles();
 			assert previousFiles != null;
-			for (File f : previousFiles) {
-				b = f.delete();
+			for (final File f : previousFiles) {
+				final boolean b = f.delete();
 				System.out.println("deleted previous xml successfully ? " + b);
 			}
-			b = dir.delete();
+			final boolean b = dir.delete();
 			System.out.println("deleted previous folder successfully ? " + b);
 		}
 		dir.mkdir();
 		System.out.println(todayFolders + " folder exist ? " + dir.exists());
-		
 		return todayFolders;
 	}
 	
