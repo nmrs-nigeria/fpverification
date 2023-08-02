@@ -95,7 +95,7 @@ public class FpverificationHomeFragmentController {
 			String datimCode = Utils.getFacilityDATIMId();
 			String zipFileName = IPShortName + "_" + "Fingerprintverification" + "_" + datimCode + "_" + formattedDate + ".zip";
 			String filepath = Utils.zipFolder(request, reportFolder, zipFileName, reportType);
-			
+
 			outputList.add(zipFileName);
 			outputList.add(dateFormat2);
 			outputList.add(String.valueOf(list.size()));
@@ -252,7 +252,7 @@ public class FpverificationHomeFragmentController {
 	public void exportXML(String PatientIdentifier, HttpServletRequest request) throws Exception {
 		
 		JAXBContext jaxbContext;
-		String datimCode = Utils.getFacilityLocalId();
+		String datimCode = Utils.getFacilityDATIMId();
 		String IPShortName = Utils.getIPShortName();
 		System.out.println("about to create jaxb context");
 		// jaxbContext = JAXBContext.newInstance("org.openmrs.module.openhmis.ndrmodel");
@@ -270,6 +270,7 @@ public class FpverificationHomeFragmentController {
 			LOG.info("Testing log4j");
 			reportFolder = Utils.ensureReportFolderExist(request, reportType);
 			datimCode = datimCode.replace("/", "_");
+			PatientIdentifier = PatientIdentifier.replace("/", "_").replace(".", "_");
 			
 			String fileName = IPShortName + "_" + "Fingerprintverification" + "_" + datimCode + "_" + PatientIdentifier
 			        + "_" + formattedDate;
