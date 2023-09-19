@@ -81,6 +81,14 @@ public class Utils {
 		return cal;
 	}
 	
+	public XMLGregorianCalendar getXmlDateMessageHeader(Date date) {
+		XMLGregorianCalendar cal = null;
+		if (date != null) {
+			cal = datatypeFactory.newXMLGregorianCalendar(new SimpleDateFormat("yyyy-MM-dd").format(date));
+		}
+		return cal;
+	}
+	
 	public static String getFacilityName() {
 		return Context.getAdministrationService().getGlobalProperty("Facility_Name");
 	}

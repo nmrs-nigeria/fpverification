@@ -132,7 +132,7 @@ public class FpverificationHomeFragmentController {
 			
 			Date date = new Date();
 			MessageHeaderType messageHeaderType = new MessageHeaderType();
-			messageHeaderType.setMessageCreationDateTime(u.getXmlDateTime(cal.getTime()));
+			messageHeaderType.setMessageCreationDateTime(u.getXmlDateMessageHeader(cal.getTime()));
 			messageHeaderType.setMessageUniqueID(UUID.randomUUID().toString());
 			messageHeaderType.setMessageVersion(1.0f);
 			messageHeaderType.setXmlType("fingerprintsvalidation");
