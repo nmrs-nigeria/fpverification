@@ -1,32 +1,21 @@
 package org.openmrs.module.fpverification.fragment.controller;
 
 import com.google.gson.Gson;
-import com.mchange.v2.c3p0.impl.NewProxyPreparedStatement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.Patient;
-import org.openmrs.api.context.Context;
-import org.openmrs.module.appframework.context.AppContextModel;
-import org.openmrs.module.appframework.service.AppFrameworkService;
-import org.openmrs.module.appui.UiSessionContext;
-import org.openmrs.module.fpverification.Utils.LoggerUtils;
 import org.openmrs.module.fpverification.Utils.Utils;
-import org.openmrs.module.fpverification.Utils.ZipUtil;
 import org.openmrs.module.fpverification.db.NdrDBManager;
 import org.openmrs.module.fpverification.model.ndr.*;
-import org.openmrs.module.referenceapplication.ReferenceApplicationConstants;
-import org.openmrs.module.webservices.rest.SimpleObject;
-import org.openmrs.ui.framework.annotation.SpringBean;
-import org.openmrs.ui.framework.page.PageModel;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,14 +65,17 @@ public class FpverificationHomeFragmentController {
 	}
 	
 	public String extractFingerprint(@RequestParam(value = "startdate", required = true) String startdate,
-	        @RequestParam(value = "enddate", required = true) String enddate, HttpServletRequest request) {
+									 @RequestParam(value = "enddate", required = true) String enddate,
+									 @RequestParam(value = "patientidentifiers", required = false) String patientidentifiers,
+									 HttpServletRequest request) {
 		List<String> outputList = new ArrayList<>();
+		int xmlFileCount = 0;
 		try {
 
 			list = new ArrayList<>();
 			Utils.ensureReportFolderExistDelete(request, reportType);
 			nd.openConnection();
-			list = nd.getPatientBiometricsVerifyDistinctList(startdate, enddate);
+			list = nd.getPatientsWithBiometrics(startdate,enddate,patientidentifiers);
 			if (this.list.isEmpty()) {
 				this.nd.closeConnection();
 				return this.gson.toJson("No record found");
@@ -98,7 +90,20 @@ public class FpverificationHomeFragmentController {
 
 			outputList.add(zipFileName);
 			outputList.add(dateFormat2);
-			outputList.add(String.valueOf(list.size()));
+
+			// Count the number of XML files generated
+			File reportDirectory = new File(reportFolder);
+			if (reportDirectory.isDirectory()) {
+				File[] files = reportDirectory.listFiles();
+				if (files != null) {  // Check if the array is not null
+					for (File file : files) {
+						if (file.isFile() && file.getName().endsWith(".xml")) {
+							xmlFileCount++;
+						}
+					}
+				}
+			}
+			outputList.add(String.valueOf(xmlFileCount));
 			outputList.add(filepath);
 
 		}catch (Exception e) {

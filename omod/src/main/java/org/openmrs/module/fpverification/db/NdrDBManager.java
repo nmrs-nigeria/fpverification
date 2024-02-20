@@ -11,6 +11,7 @@ import org.openmrs.module.fpverification.model.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NdrDBManager {
@@ -78,6 +79,53 @@ public class NdrDBManager {
 		catch (Exception ex) {
 			
 		}
+	}
+	
+	public List<Integer> getPatientsWithBiometrics(String startdate, String enddate, String patientartno) throws Exception {
+		List<Integer> list = new ArrayList<>();
+
+
+		try {
+
+			if(!patientartno.equalsIgnoreCase("") || patientartno !=""){
+				String[] patientartnoArray = patientartno.split(",");
+				List <String> patientartnoArrayList = Arrays.asList(patientartnoArray);
+				for(String patientidentifier: patientartnoArrayList){
+
+					String sql2 = "select b.*,p.`identifier` from `biometricverificationinfo` b left join patient_identifier p on p.patient_id = b.patient_Id where p.identifier_type =4 and DATE(b.date_created) between ? and ?  AND p.identifier = ?";
+
+					pStatement1 = conn.prepareStatement(sql2);
+					pStatement1.setString(1, startdate);
+					pStatement1.setString(2, enddate);
+					pStatement1.setString(3, patientidentifier);
+
+					rs2 = pStatement1.executeQuery();
+					while (rs2.next()) {
+						list.add(rs2.getInt("patient_id"));
+					}
+				}
+
+
+			}else{
+				String sql2 = "select b.*,p.`identifier` from `biometricverificationinfo` b left join patient_identifier p on p.patient_id = b.patient_Id where p.identifier_type =4 and DATE(b.date_created) between ? and ? ";
+				pStatement1 = conn.prepareStatement(sql2);
+				pStatement1.setString(1, startdate);
+				pStatement1.setString(2, enddate);
+
+				rs2 = pStatement1.executeQuery();
+				while (rs2.next()) {
+					list.add(rs2.getInt("patient_id"));
+				}
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL Error" + e);
+		}
+		finally {
+		}
+
+		return list;
 	}
 	
 	public ResultSet getPatientBiometricsVerify(String startdate, String enddate, Integer patientid) throws Exception {

@@ -9,17 +9,36 @@
 </div>
 
 
-<div class="container" style="padding-top: 10px;">
-    <div style="margin-left: 32%; width: 40%; height: 50%; background-color: #00463f; border-radius: 10px; ">
+<div class="container" id="container" style="padding-top: 10px;">
+    <div style="margin-left: 28%; width: 50%; height: 50%; background-color: #00463f; border-radius: 10px; " id="customDiv">
         <br/> <br/>
-        <div>
-            <label id="lblfrom" for="startdate" style="color: white; margin-left: 50px;">Start Date</label><br id="br4">
-            <input style="background-color: #E8F0FE; margin-left: 52px;margin-bottom: 15px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px;" name="startdate" id="startdate" type="date" required="required"/><br>
-            <label id="lblto" for="enddate" style="color: white; margin-left: 50px;">End Date</label><br id="br6">
-            <input style="background-color: #E8F0FE; margin-left: 52px;margin-bottom: 15px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px;" name="enddate" id="enddate" type="date" required="required"/><br>
-            <input style="background-color: #E8F0FE; margin-left: 52px; width: 70%; height: 45px; border-radius: 25px; margin-top: 15px" type="button" value="Export" onclick="getStart()" class="btn btn-primary" />
+        <div style="padding-left: 38px">
+            <label for="custom" style="font-weight: bold; color: white; cursor: pointer;">
+                <input style="background-color: #E8F0FE; border-radius: 10px; margin-top: 15px; cursor: pointer" type="checkbox" id="custom" name="custom" value="custom" onclick="checkBoxCheck()">
+                Custom
+            </label>
+            <br id="br1">
+            <input style="background-color: #E8F0FE; width: 85%; height: 45px; border-radius: 10px; margin-top: 15px; padding-left: 18px; padding-right: 10px;  display:none;" type="text" value="comma separated patient ART Identifiers" id="identifiers" onfocus=this.value='' name="identifiers"><br id="br2">
+            <br id="br3"/>
+            <div style="display: flex;">
+                <div style="width: 45%">
+                    <label id="lblfrom" name="startdate" for="from" style="font-weight: bold; color: white;">Start Date</label><br id="br4">
+                    <input style="font-weight: bold;padding-left: 10px; padding-right: 10px; background-color: #E8F0FE; margin-bottom: 15px; width: 85%; height: 45px; border-radius: 10px; margin-top: 15px;" id="startdate" name="startdate" type="date" required="required"/><br id="br5">
+                </div>
+                <div style="width: 48%; margin-left: 5%">
+                    <label id="lblto" for="to" style="font-weight: bold; color: white;">End Date</label><br id="br6">
+                    <input style="font-weight: bold;padding-left: 10px; padding-right: 10px; background-color: #E8F0FE; width: 87%; height: 45px; border-radius: 10px; margin-top: 15px;" id="enddate" name="enddate" type="date" required="required"/><br id="br7">
+                </div>
+            </div>
+            <br/>
+            <div style="display: flex; justify-content: center;"> <!-- Center the button -->
+                <div style="width: 75%">
+                    <input style="font-weight: bold; padding-left: 10px; padding-right: 10px; background-color: #E8F0FE; width: 93%; height: 45px; border-radius: 10px; margin-top: 15px;" type="button" value="Export" onclick="getStart()" id="exportData" class="btn btn-primary" />
+                </div>
+            </div>
         </div>
-        <br/><br/>
+        <br/>
+        <br/>
     </div>
     <br/>
     <div class="table-responsive">
@@ -64,10 +83,24 @@
         console.log("Started Job");
         var startdate = document.getElementById("startdate").value;
         var enddate = document.getElementById("enddate").value;
+        let patientidentifiers = document.getElementById("identifiers").value;
+
+        /*if(identifiers === "comma separated patient identifiers or Ids")
+            identifiers = '';*/
 
         // Check if either startdate or enddate is empty
         if(startdate === "" || enddate === ""){
             alert("Please provide both start date and end date");
+            // Hide 'gen-wait' element since there's no processing happening
+            jq('#gen-wait').hide();
+            return;
+        }
+
+        console.log(startdate);
+        console.log(enddate);
+
+        if (patientidentifiers === "Comma Separated Patient ART Identifiers" || (jq('#custom').prop('checked') && patientidentifiers === "")) {
+            alert("Please enter the patient identifiers separated with comma");
             // Hide 'gen-wait' element since there's no processing happening
             jq('#gen-wait').hide();
             return;
@@ -79,6 +112,7 @@
             data:{
                 'startdate':startdate,
                 'enddate':enddate,
+                'patientidentifiers' : patientidentifiers,
             },
             success: function (response) {
                 // Hide 'gen-wait' element when a response is received.
@@ -119,4 +153,23 @@
     today = yyyy + '-' + mm + '-' + dd;
     document.getElementById("startdate").setAttribute("max", today);
     document.getElementById("enddate").setAttribute("max", today);
+
+    let isCheckedBefore = false;
+
+    function checkBoxCheck() {
+        const checkBox = document.getElementById("custom");
+        const identifiersInput = document.getElementById('identifiers');
+
+        if (checkBox.checked === true) {
+            identifiersInput.style.display = 'inline';
+            isCheckedBefore = true;
+        } else {
+            identifiersInput.style.display = 'none';
+            if (isCheckedBefore) {
+                identifiersInput.value = ''; // Clear the input value
+                isCheckedBefore = false;
+            }
+        }
+    }
+
 </script>
