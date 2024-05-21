@@ -84,7 +84,6 @@ public class NdrDBManager {
 	public List<Integer> getPatientsWithBiometrics(String startdate, String enddate, String patientartno) throws Exception {
 		List<Integer> list = new ArrayList<>();
 
-
 		try {
 
 			if(!patientartno.equalsIgnoreCase("") || patientartno !=""){
@@ -105,17 +104,6 @@ public class NdrDBManager {
 					}
 				}
 
-
-			}else{
-				String sql2 = "select b.*,p.`identifier` from `biometricverificationinfo` b left join patient_identifier p on p.patient_id = b.patient_Id where p.identifier_type =4 and DATE(b.date_created) between ? and ? ";
-				pStatement1 = conn.prepareStatement(sql2);
-				pStatement1.setString(1, startdate);
-				pStatement1.setString(2, enddate);
-
-				rs2 = pStatement1.executeQuery();
-				while (rs2.next()) {
-					list.add(rs2.getInt("patient_id"));
-				}
 			}
 		}
 		catch (SQLException e) {
@@ -125,6 +113,27 @@ public class NdrDBManager {
 		finally {
 		}
 
+		return list;
+	}
+	
+	public List<Integer> getPatientsWithBiometrics(String startdate, String enddate) throws Exception {
+		List<Integer> list = new ArrayList<>();
+		try {
+			String sql = "select b.*,p.`identifier` from `biometricverificationinfo` b left join patient_identifier p on p.patient_id = b.patient_Id where p.identifier_type =4 and DATE(b.date_created) between ? and ? ";
+			pStatement1 = conn.prepareStatement(sql);
+			pStatement1.setString(1, startdate);
+			pStatement1.setString(2, enddate);
+
+			rs2 = pStatement1.executeQuery();
+			while (rs2.next()) {
+				list.add(rs2.getInt("patient_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL Error" + e);
+		} finally {
+			// Close resources (e.g., statement, resultset)
+		}
 		return list;
 	}
 	

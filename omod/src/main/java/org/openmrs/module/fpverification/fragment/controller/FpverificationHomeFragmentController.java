@@ -56,8 +56,6 @@ public class FpverificationHomeFragmentController {
 	
 	String dateFormat2;
 	
-	private String formattedDate;
-	
 	private Thread thread1;
 	
 	public FpverificationHomeFragmentController() {
@@ -70,12 +68,20 @@ public class FpverificationHomeFragmentController {
 									 HttpServletRequest request) {
 		List<String> outputList = new ArrayList<>();
 		int xmlFileCount = 0;
+		String formattedDate2 = new SimpleDateFormat("ddMMyyHHmmss").format(new Date());
 		try {
 
 			list = new ArrayList<>();
 			Utils.ensureReportFolderExistDelete(request, reportType);
 			nd.openConnection();
-			list = nd.getPatientsWithBiometrics(startdate,enddate,patientidentifiers);
+			if (patientidentifiers != null && !patientidentifiers.isEmpty()) {
+				list = nd.getPatientsWithBiometrics(startdate, enddate, patientidentifiers);
+				System.out.println(patientidentifiers + " is called with identifiers");
+			} else {
+				list = nd.getPatientsWithBiometrics(startdate, enddate);
+				System.out.println("Reach not call with identifiers");
+			}
+			//list = nd.getPatientsWithBiometrics(startdate,enddate,patientidentifiers);
 			if (this.list.isEmpty()) {
 				this.nd.closeConnection();
 				return this.gson.toJson("No record found");
@@ -85,7 +91,7 @@ public class FpverificationHomeFragmentController {
 			String facilityName = Utils.getFacilityName();
 			String IPShortName = Utils.getIPShortName();
 			String datimCode = Utils.getFacilityDATIMId();
-			String zipFileName = IPShortName + "_" + "Fingerprintverification" + "_" + datimCode + "_" + formattedDate + ".zip";
+			String zipFileName = IPShortName + "_" + "Fingerprintverification" + "_" + datimCode + "_" + formattedDate2 + ".zip";
 			String filepath = Utils.zipFolder(request, reportFolder, zipFileName, reportType);
 
 			outputList.add(zipFileName);
@@ -267,7 +273,7 @@ public class FpverificationHomeFragmentController {
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		System.out.println("done creating marshaller");
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		formattedDate = new SimpleDateFormat("ddMMyy").format(new Date());
+		String formattedDate = new SimpleDateFormat("ddMMyy").format(new Date());
 		
 		if (containerTemplate != null) {
 			
