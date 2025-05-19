@@ -12,6 +12,7 @@ package org.openmrs.module.fpverification;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.BaseModuleActivator;
+import org.openmrs.module.ModuleFactory;
 
 /**
  * This class contains the logic that is run every time this module is either started or shutdown
@@ -24,7 +25,7 @@ public class FpverificationActivator extends BaseModuleActivator {
 	 * @see #started()
 	 */
 	public void started() {
-		log.info("Started Fpverification");
+		log.info("FPVerification Module started");
 	}
 	
 	/**

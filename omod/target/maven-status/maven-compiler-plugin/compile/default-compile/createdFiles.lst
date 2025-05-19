@@ -1,3 +1,4 @@
+org\openmrs\module\fpverification\web\controller\BiometricRestController.class
 org\openmrs\module\fpverification\Utils\ZipUtil.class
 org\openmrs\module\fpverification\model\ndr\MessageHeaderType.class
 org\openmrs\module\fpverification\model\ndr\Container.class
