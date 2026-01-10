@@ -18,7 +18,7 @@
                 Custom
             </label>
             <br id="br1">
-            <input style="background-color: #E8F0FE; width: 85%; height: 45px; border-radius: 10px; margin-top: 15px; padding-left: 18px; padding-right: 10px;  display:none;" type="text" value="comma separated patient ART Identifiers" id="identifiers" onfocus=this.value='' name="identifiers"><br id="br2">
+            <input style="background-color: #E8F0FE; width: 85%; height: 45px; border-radius: 10px; margin-top: 15px; padding-left: 18px; padding-right: 10px;  display:none;" type="text" placeholder="ART numbers separated by comma" value="" id="identifiers" onfocus=this.value='' name="identifiers"><br id="br2">
             <br id="br3"/>
             <div style="display: flex;">
                 <div style="width: 45%">
@@ -96,8 +96,7 @@
             return;
         }
 
-        console.log(startdate);
-        console.log(enddate);
+        console.log(startdate + ' ' + enddate);
 
         if (patientidentifiers === "Comma Separated Patient ART Identifiers" || (jq('#custom').prop('checked') && patientidentifiers === "")) {
             alert("Please enter the patient identifiers separated with comma");
@@ -173,3 +172,5 @@
     }
 
 </script>
+
+
